@@ -1,1 +1,2 @@
 # popl-project
+## Project Idea: Writing an interpreter that can execute basic mathematical expressions written in a python-style syntax. Possibly extend this to include some special operations such as finding the square root of a number with the notation: ''x
