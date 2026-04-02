@@ -12,7 +12,7 @@ In the interpreter, that becomes:
 
 Call Structure
 ```
-1. eval(Expr, Env) evaluates expressions
+1. eval(^   , Env) evaluates expressions
 2. exec(Stmt, Env) executes statements
 3. execProgram(List<Stmt>) runs a program
 
