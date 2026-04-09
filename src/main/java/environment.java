@@ -2,7 +2,6 @@ import AST.*;
 import AST.expression.*;
 import AST.statement.*;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
