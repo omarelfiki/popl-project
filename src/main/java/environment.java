@@ -31,7 +31,7 @@ public class environment {
                 case "+" -> eval(u.expr(), env);
                 default -> throw new IllegalArgumentException("unknown unary operator");
             };
-            case expression.binary b -> {
+            case binary b -> {
                 double l = eval(b.left(), env);
                 double r = eval(b.right(), env);
                 yield switch (b.op()) {
