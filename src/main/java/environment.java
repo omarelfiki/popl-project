@@ -2,6 +2,9 @@ import AST.*;
 import AST.expression.*;
 import AST.statement.*;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class environment {
     private final Map<String, Double> bindings;
@@ -60,6 +63,30 @@ public class environment {
                     default -> throw new IllegalArgumentException("unknown binary operator");
                 };
             }
+        };
+    }
+
+    @FunctionalInterface
+    interface TriFunction<A, B, C, R> {
+        R apply(A a, B b, C c);
+    }
+
+    static <R> R fold(
+            expression e,
+            Function<Double, R> onNumber,
+            Function<String, R> onVariable,
+            BiFunction<String, R, R> onUnary,
+            TriFunction<R, String, R, R> onBinary) {
+        return switch (e) {
+            case number n   -> onNumber.apply(n.value());
+            case variable v -> onVariable.apply(v.name());
+            case unary u    -> onUnary.apply(
+                    u.op(),
+                    fold(u.expr(), onNumber, onVariable, onUnary, onBinary));
+            case binary b   -> onBinary.apply(
+                    fold(b.left(),  onNumber, onVariable, onUnary, onBinary),
+                    b.op(),
+                    fold(b.right(), onNumber, onVariable, onUnary, onBinary));
         };
     }
 }

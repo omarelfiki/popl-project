@@ -10,4 +10,3 @@ public sealed interface expression permits expression.number, expression.variabl
     record binary(expression left, String op, expression right) implements expression {}
     record unary(String op, expression expr) implements expression {}
 }
-s
