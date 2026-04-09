@@ -1,5 +1,6 @@
-import AST.expression.*;
 import AST.*;
+import AST.expression.*;
+import AST.statement.*;
 import java.util.Map;
 
 public class environment {
@@ -9,16 +10,33 @@ public class environment {
         this.bindings = bindings;
     }
 
-    public static environment empty() {
-        return new environment(Map.of());
-    }
-
     public double lookup(String name) {
         Double value = bindings.get(name);
         if (value == null) {
             throw new IllegalArgumentException("unbound variable: " + name);
         }
         return value;
+    }
+
+    public Map<String, Double> getBindings() {
+        return this.bindings;
+    }
+
+    public static environment empty() {
+        return new environment(Map.of());
+    }
+
+    public static environment exec(statement s, environment env) {
+        return switch (s) {
+            case assign a -> {
+                double value = environment.eval(a.expr(), env);
+                Map<String, Double> newBindings = env.getBindings();
+                newBindings.put(a.var(), value);
+
+                yield new environment(newBindings);
+            }
+            default -> throw new IllegalArgumentException("undefined statement");
+        };
     }
 
     public static double eval(expression e, environment env) {
