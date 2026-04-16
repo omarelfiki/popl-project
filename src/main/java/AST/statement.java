@@ -1,7 +1,15 @@
 package AST;
 
-/* Statements execute to (maybe) change state and may or may not return a value */
+/**
+ * Root type for all statement nodes in the AST.
+ *
+ * <p>A statement represents an executable action that may
+ * mutate the program state (for example, variable bindings).
+ * This sealed interface currently allows only {@link statement.assign}.
+ *
+ */
 public sealed interface statement permits statement.assign {
-    
-    public record assign(String var, expression expr) implements statement {}    
+
+     record assign(String var, expression expr) implements statement {}
 }
+
