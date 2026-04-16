@@ -59,6 +59,7 @@ public class environment {
                     case "-" -> l - r;
                     case "*" -> l * r;
                     case "/" -> l / r;
+                    case "**" -> Math.pow(l, r);
                     default -> throw new IllegalArgumentException("unknown binary operator");
                 };
             }
