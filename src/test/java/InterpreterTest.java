@@ -11,13 +11,15 @@ class InterpreterTest {
         assertEquals(5.0, result);
     }
     
+
     @Test
     void testUnaryNegative() {
         environment env = environment.empty();
         double result = environment.eval(new expression.unary("-", new number(5.0)), env);
         assertEquals(-5.0, result);
     }
-
+    
+    // TODO: look at the math behind the unary negative operation
     @Test
     void testUnaryPositive() {
         environment env = environment.empty();

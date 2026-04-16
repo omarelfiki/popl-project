@@ -6,6 +6,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class environment {
+
+    // TODO: Comment on the different functions
     private final Map<String, Double> bindings;
 
     public environment(Map<String, Double> bindings) {
@@ -89,4 +91,6 @@ public class environment {
                     fold(b.right(), onNumber, onVariable, onUnary, onBinary));
         };
     }
+
+        // TODO: implement a fold for statement
 }
