@@ -1,3 +1,5 @@
+package interpreter;
+
 import AST.*;
 import AST.expression.*;
 import AST.statement.*;
@@ -104,7 +106,7 @@ public class environment {
     }
 
     @FunctionalInterface
-    interface TriFunction<A, B, C, R> {
+    public interface TriFunction<A, B, C, R> {
         R apply(A a, B b, C c);
     }
 
@@ -119,7 +121,7 @@ public class environment {
      * @param onBinary handler for binary expressions after folding both children
      * @return the folded result
      */
-    static <R> R fold(
+    public static <R> R fold(
             expression e,
             Function<Double, R> onNumber,
             Function<String, R> onVariable,
